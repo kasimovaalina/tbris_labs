@@ -36,3 +36,8 @@
 
 # mac
 .DS_Store
+*.dSYM/
+
+# etc
+lab_3_1
+lab_3_2
