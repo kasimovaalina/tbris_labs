@@ -3,7 +3,6 @@
 #include <mutex>
 
 std::mutex a_mutex;
-std::mutex b_mutex;
 
 void func1(int &a) {
   for(int i = 0;i < 500000;  i++){
