@@ -40,3 +40,11 @@
 
 # etc
 lab_2.dSYM
+solver*
+
+#cmake
+solver*
+cmake*/
+cmake*
+Makefile
+
