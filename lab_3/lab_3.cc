@@ -17,7 +17,7 @@ void print_matrix(std::vector<std::vector<double>>& m1)
 
 int main()
 {
-    const int n = 200;
+    const int n = 1000;
 
     std::vector<std::vector<double>> A(n, std::vector<double>(n, 0));
     std::vector<double> B(n, 0);
@@ -49,17 +49,18 @@ int main()
     
     #pragma region Решение СЛАУ методом Гаусса
     auto start_time = std::chrono::high_resolution_clock::now();
-    for (int k = 0; k < n; k++) {
+    for (int i = 0; i < n; i++) {
         #pragma omp parallel for
-        for (int i = k + 1; i < n; i++) {
-            double coeff = A[i][k] / A[k][k];
-            for (int j = k; j < n; j++) {
-                A[i][j] -= coeff * A[k][j];
+        for (int j = i + 1; j < n; j++) {
+            double coeff = A[j][i] / A[i][i];
+            for (int k = i; k < n; k++) {
+                A[j][k] -= coeff * A[i][k];
             }
-            B[i] -= coeff * B[k];
+            B[j] -= coeff * B[i];
         }
     }
 
+    #pragma omp parallel for
     for (int i = n - 1; i >= 0; i--) {
         double sum = 0;
         for (int j = i + 1; j < n; j++) {
