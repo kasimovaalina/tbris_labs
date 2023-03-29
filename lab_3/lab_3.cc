@@ -60,7 +60,6 @@ int main()
         }
     }
 
-    #pragma omp parallel for
     for (int i = n - 1; i >= 0; i--) {
         double sum = 0;
         for (int j = i + 1; j < n; j++) {
