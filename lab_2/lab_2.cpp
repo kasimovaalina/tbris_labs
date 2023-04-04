@@ -50,7 +50,7 @@ void multiply_matrices_linear(){
     int result[SIZE][SIZE] = {0};
     #pragma endregion
 
-    #pragma region Линейное
+    #pragma region Последовательное
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
