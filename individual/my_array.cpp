@@ -2,21 +2,21 @@
 
 #pragma region Конструктор и деструкторы
 template <typename T>
-My_array<T>::My_array(){
+My_array<T>:: My_array(){
     _data = nullptr;
     _size = 0;
     _capacity = 0;
 }
 
 template <typename T>
-My_array<T>::My_array(int size){
+My_array<T>:: My_array(int size){
     _size = size;
     _capacity = size;
     _data = new T[_capacity];
 }
 
 template <typename T>
-My_array<T>::My_array(const My_array& other){
+My_array<T>:: My_array(const My_array& other){
     _size = other._size;
     _capacity = other._capacity;
     _data = new T[_capacity];
@@ -26,19 +26,19 @@ My_array<T>::My_array(const My_array& other){
 }
 
 template <typename T>     
-My_array<T>::~My_array(){
+My_array<T>:: ~My_array(){
     delete[] _data;
 }
 #pragma endregion
 
 template <typename T>
-My_array<T> My_array<T>::operator=(My_array other){
+My_array<T> My_array<T>:: operator=(My_array other){
     swap(*this, other);
     return *this;
 }
 
 template <typename T>
-T& My_array<T>::operator[](size_t index){
+T& My_array<T>:: operator[](size_t index){
     if (index >= _size || index < 0) {
         throw std::out_of_range("Индекс вне границ массива!");
     }
@@ -46,18 +46,18 @@ T& My_array<T>::operator[](size_t index){
 }
 
 template <typename T>
-size_t My_array<T>::get_size() {
+size_t My_array<T>:: get_size() {
     return _size;
 }
 
 
 #pragma region Для итераторов
 template <typename T>
-T*  My_array<T>::begin() {
+T*  My_array<T>:: begin() {
     return _data;
 }
 template <typename T>
-T*  My_array<T>::end(){
+T*  My_array<T>:: end(){
     return _data + _size;
 }
 #pragma endregion
@@ -74,7 +74,7 @@ void My_array<T>::resize(size_t new_size){
 }
 
 template <typename T>
-void My_array<T>::insert(size_t index, const T& value){
+void My_array<T>:: insert(size_t index, const T& value){
     if (index > _size || index < 0){
         throw std::out_of_range("Индекс вне границ массива!");
     }
@@ -94,7 +94,7 @@ void My_array<T>::insert(size_t index, const T& value){
 }
         
 template <typename T>
-void My_array<T>::erase(size_t index){
+void My_array<T>:: erase(size_t index){
     if (index >= _size || index < 0){
         throw std::out_of_range("Индекс вне границ массива!");
     }
@@ -106,7 +106,7 @@ void My_array<T>::erase(size_t index){
 
 
 template <typename T>
-void My_array<T>::reserve(size_t new_capacity){
+void My_array<T>:: reserve(size_t new_capacity){
     if (new_capacity > _capacity) {
         T* new_data = new T[new_capacity];
         for (size_t i = 0; i < _size; i++) {

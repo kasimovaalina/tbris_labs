@@ -60,6 +60,8 @@ int main() {
     std::cout << "\n";
 
     swap(a1,a3);
+
+    //a1 = a3;
     std::cout << "Массив a1 после swap:\n";
     for (auto it = a1.begin(); it != a1.end(); it++) {
         std::cout << *it << " ";
