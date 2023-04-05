@@ -6,24 +6,31 @@ int main() {
     std::cout << "Массив а1:\n";
     std::cout << "Размер до добавления новых элементов: " << a1.get_size() << "\n";
     a1.insert(0,1);
+    a1.insert(0,1);
     a1.insert(0,2);
     a1.insert(0,3);
+    a1.insert(a1.get_size(), 100);
     std::cout << "Размер после добавления новых элементов: " << a1.get_size() << "\n";
+
     std::cout << "Содержание массива a1:\n";
     for (int i = 0; i < a1.get_size(); i++){
         std::cout << a1[i] << " ";
     }
+
     a1.erase(0);
+
     std::cout << "\nСодержание массива a1 после удаления элемента №0:\n";
     for (int i = 0; i < a1.get_size(); i++){
         std::cout << a1[i] << " ";
     }
     std::cout << "\n";
 
-    My_array<double> a2(5);    
+    My_array<double> a2(5);
+
     for(int i = 0; i < a2.get_size(); i++){
         a2[i] = i*M_PI;
     }
+
 
     std::cout << "Прохождение массива a2, используя итераторы:\n";
     for (auto it = a2.begin(); it != a2.end(); it++) {
@@ -33,7 +40,11 @@ int main() {
 
     a2.resize(10);
 
-    for(int i = a2.get_size(); i < 10; i++){
+    for(int i = 0; i < 10; i++){
+        a2[i] =  i*M_PI;
+    }
+
+    for(int i = 0; i < 10; i++){
         a2[i] =  i*M_PI;
     }
 
@@ -41,7 +52,7 @@ int main() {
     for (auto it = a2.begin(); it != a2.end(); it++) {
         std::cout << *it << " ";
     }
-    std::cout << "\n";
+    std::cout << "\n" << a2.get_size() <<"\n";
 
     a2.resize(3);
 
@@ -59,9 +70,7 @@ int main() {
     }
     std::cout << "\n";
 
-    swap(a1,a3);
-
-    //a1 = a3;
+    a1.swap(a3);
     std::cout << "Массив a1 после swap:\n";
     for (auto it = a1.begin(); it != a1.end(); it++) {
         std::cout << *it << " ";

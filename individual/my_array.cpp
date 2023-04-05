@@ -16,7 +16,7 @@ My_array<T>:: My_array(int size){
 }
 
 template <typename T>
-My_array<T>:: My_array(const My_array& other){
+My_array<T>:: My_array(const My_array<T>& other){
     _size = other._size;
     _capacity = other._capacity;
     _data = new T[_capacity];
@@ -32,14 +32,15 @@ My_array<T>:: ~My_array(){
 #pragma endregion
 
 template <typename T>
-My_array<T> My_array<T>:: operator=(My_array other){
-    swap(*this, other);
+My_array<T>& My_array<T>:: operator=(My_array other){
+    //TODO
+    this->swap(other);
     return *this;
 }
 
 template <typename T>
 T& My_array<T>:: operator[](size_t index){
-    if (index >= _size || index < 0) {
+    if (index >= _size) {
         throw std::out_of_range("Индекс вне границ массива!");
     }
     return _data[index];
@@ -75,7 +76,7 @@ void My_array<T>::resize(size_t new_size){
 
 template <typename T>
 void My_array<T>:: insert(size_t index, const T& value){
-    if (index > _size || index < 0){
+    if (index > _size){
         throw std::out_of_range("Индекс вне границ массива!");
     }
     if (_size == _capacity) {
@@ -84,7 +85,6 @@ void My_array<T>:: insert(size_t index, const T& value){
         } else {
             reserve(_capacity*2);
         }
-
     }
     for (size_t i=_size; i > index; i--){
         _data[i] = _data[i-1];
@@ -95,7 +95,7 @@ void My_array<T>:: insert(size_t index, const T& value){
         
 template <typename T>
 void My_array<T>:: erase(size_t index){
-    if (index >= _size || index < 0){
+    if (index >= _size){
         throw std::out_of_range("Индекс вне границ массива!");
     }
     for (size_t i = index; i < _size - 1; i++) {
@@ -104,6 +104,12 @@ void My_array<T>:: erase(size_t index){
     _size--;
 }
 
+template <typename T>
+void My_array<T>:: swap(My_array& other) {
+    std::swap(_data, other._data);
+    std::swap(_size, other._size);
+    std::swap(_capacity, other._capacity);
+}
 
 template <typename T>
 void My_array<T>:: reserve(size_t new_capacity){
