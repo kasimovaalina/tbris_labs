@@ -9,7 +9,7 @@ My_array<T>:: My_array(){
 }
 
 template <typename T>
-My_array<T>:: My_array(int size){
+My_array<T>:: My_array(size_t size){
     _size = size;
     _capacity = size;
     _data = new T[_capacity];
@@ -32,9 +32,11 @@ My_array<T>:: ~My_array(){
 #pragma endregion
 
 template <typename T>
-My_array<T>& My_array<T>:: operator=(My_array other){
-    //TODO
-    this->swap(other);
+My_array<T>& My_array<T>:: operator=(const My_array& other){
+    if (this != std::addressof(other)){
+        My_array temp(other);
+        this->swap(temp);
+    }
     return *this;
 }
 
@@ -68,8 +70,14 @@ void My_array<T>::resize(size_t new_size){
     if (new_size > _capacity) {
         reserve(new_size);
     }
-    for (size_t i = _size; i < new_size; i++) {
-        _data[i] = T();
+    if (new_size > _size){
+        for (size_t i = _size; i < new_size; i++) {
+            _data[i] = T();
+        }
+    } else if (new_size < _size) {
+        for (size_t j = new_size; j < _size; j++) {
+            _data[j].~T();
+        }
     }
     _size = new_size;
 }

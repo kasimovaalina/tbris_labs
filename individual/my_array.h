@@ -9,10 +9,11 @@ class My_array {
         size_t _capacity;
     public:
         My_array();
-        My_array(int size);
+        //тут была ошибка 
+        My_array(size_t size);
         My_array(const My_array& other);
         ~My_array();
-        My_array& operator=(My_array other);
+        My_array& operator=(const My_array& other);
         T& operator[](size_t index);
         size_t get_size();
         T* begin();
